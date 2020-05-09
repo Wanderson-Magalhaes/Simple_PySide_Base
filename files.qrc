@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="16x16">
+    <file>icons/16x16/cil-cursor-move.png</file>
+    <file>icons/16x16/cil-menu.png</file>
+    <file>icons/16x16/cil-window-maximize.png</file>
+    <file>icons/16x16/cil-window-minimize.png</file>
+    <file>icons/16x16/cil-window-restore.png</file>
+    <file>icons/16x16/cil-x.png</file>
+    <file>icons/16x16/cil-home.png</file>
+    <file>icons/16x16/cil-settings.png</file>
+  </qresource>
+</RCC>
