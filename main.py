@@ -2,11 +2,12 @@
 ##
 ## BY: WANDERSON M.PIMENTA
 ## PROJECT MADE WITH: Qt Designer and PySide2
-## V: 0.1
+## V: 1.0.0
 ##
 ################################################################################
 
 import sys
+import platform
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
@@ -14,6 +15,10 @@ from PySide2.QtWidgets import *
 
 # GUI FILE
 from ui_main import Ui_MainWindow
+
+# IMPORT QSS CUSTOM
+from ui_styles import Style
+
 # IMPORT FUNCTIONS
 from ui_functions import *
 
@@ -23,25 +28,64 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        ## PRINT ==> SYSTEM
+        print('System: ' + platform.system())
+        print('Version: ' +platform.release())
+
         ########################################################################
         ## START - WINDOW ATTRIBUTES
         ########################################################################
 
+        ## REMOVE ==> STANDARD TITLE BAR
+        UIFunctions.removeTitleBar(True)
+        ## ==> END ##
+
         ## SET ==> WINDOW TITLE
         self.setWindowTitle('Main Window - Python Base')
-        self.ui.label_title_bar_top.setText('Main Window - Python Base')
+        UIFunctions.labelTitle(self, 'Main Window - Python Base')
+        UIFunctions.labelDescription(self, 'Set text')
         ## ==> END ##
 
         ## REMOVE ==> STANDARD TITLE BAR
-        Functions.removeTitleBar(True)
+        startSize = QSize(1000, 720)
+        self.resize(startSize)
+        self.setMinimumSize(startSize)
+        # UIFunctions.enableMaximumSize(self, 500, 720)
         ## ==> END ##
+
+        ## ==> CREATE MENUS
+        ########################################################################
+
+        ## ==> TOGGLE MENU SIZE
+        self.ui.btn_toggle_menu.clicked.connect(lambda: UIFunctions.toggleMenu(self, 220, True))
+        ## ==> END ##
+
+        ## ==> ADD CUSTOM MENUS
+        self.ui.stackedWidget.setMinimumWidth(20)
+        UIFunctions.addNewMenu(self, "Home Page", "btn_home", "url(:/16x16/icons/16x16/cil-home.png)", True)
+        UIFunctions.addNewMenu(self, "Add User", "btn_new_user", "url(:/16x16/icons/16x16/cil-user-follow.png)", True)
+        UIFunctions.addNewMenu(self, "Custom Widgets", "btn_widgets", "url(:/16x16/icons/16x16/cil-equalizer.png)", False)
+        ## ==> END ##
+
+        # START MENU => SELECTION
+        UIFunctions.selectStandardMenu(self, "btn_home")
+        ## ==> END ##
+
+        ## ==> START PAGE
+        self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
+        ## ==> END ##
+
+        ## USER ICON ==> SHOW HIDE
+        UIFunctions.userIcon(self, "WM", "url(:/16x16/icons/16x16/cil-user.png)", True)
+        ## ==> END ##
+
 
         ## ==> MOVE WINDOW / MAXIMIZE / RESTORE
         ########################################################################
         def moveWindow(event):
             # IF MAXIMIZED CHANGE TO NORMAL
-            if Functions.returStatus() == 1:
-                Functions.maximize_restore(self)
+            if UIFunctions.returStatus() == 1:
+                UIFunctions.maximize_restore(self)
 
             # MOVE WINDOW
             if event.buttons() == Qt.LeftButton:
@@ -49,24 +93,20 @@ class MainWindow(QMainWindow):
                 self.dragPos = event.globalPos()
                 event.accept()
 
-        def dobleClickMaximizeRestore(event):
-            # IF DOUBLE CLICK CHANGE STATUS
-            if event.type() == QtCore.QEvent.MouseButtonDblClick:
-                QtCore.QTimer.singleShot(150, lambda: Functions.maximize_restore(self))
-
         # WIDGET TO MOVE
         self.ui.frame_label_top_btns.mouseMoveEvent = moveWindow
-        self.ui.frame_label_top_btns.mouseDoubleClickEvent = dobleClickMaximizeRestore
         ## ==> END ##
 
         ## ==> LOAD DEFINITIONS
         ########################################################################
-        Functions.uiDefinitions(self)
+        UIFunctions.uiDefinitions(self)
         ## ==> END ##
 
         ########################################################################
         ## END - WINDOW ATTRIBUTES
         ############################## ---/--/--- ##############################
+
+
 
 
         ########################################################################
@@ -76,19 +116,14 @@ class MainWindow(QMainWindow):
         ## ==> USER CODES BELLOW                                              ##
         ########################################################################
 
-        ## ==> CREATE MENUS
-        ########################################################################
 
-        ## ==> TOGGLE MENU SIZE
-        self.ui.btn_toggle_menu.clicked.connect(lambda: Functions.toggleMenu(self, 250))
+
+        ## ==> QTableWidget RARAMETERS
+        ########################################################################
+        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         ## ==> END ##
 
-        ## ==> START PAGE
-        ########################################################################
-        self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
-        self.ui.btn_home.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_home))
-        self.ui.btn_settings.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_settings))
-        ## ==> END ##
+
 
         ########################################################################
         #                                                                      #
@@ -96,10 +131,39 @@ class MainWindow(QMainWindow):
         #                                                                      #
         ############################## ---/--/--- ##############################
 
+
         ## SHOW ==> MAIN WINDOW
         ########################################################################
         self.show()
         ## ==> END ##
+
+    ########################################################################
+    ## MENUS ==> DYNAMIC MENUS FUNCTIONS
+    ########################################################################
+    def Button(self):
+        # GET BT CLICKED
+        btnWidget = self.sender()
+
+        # PAGE HOME
+        if btnWidget.objectName() == "btn_home":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
+            UIFunctions.resetStyle(self, "btn_home")
+            UIFunctions.labelPage(self, "Home")
+            btnWidget.setStyleSheet(UIFunctions.selectMenu(btnWidget.styleSheet()))
+
+        # PAGE NEW USER
+        if btnWidget.objectName() == "btn_new_user":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.page_home)
+            UIFunctions.resetStyle(self, "btn_new_user")
+            UIFunctions.labelPage(self, "New User")
+            btnWidget.setStyleSheet(UIFunctions.selectMenu(btnWidget.styleSheet()))
+
+        # PAGE WIDGETS
+        if btnWidget.objectName() == "btn_widgets":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.page_widgets)
+            UIFunctions.resetStyle(self, "btn_widgets")
+            UIFunctions.labelPage(self, "Custom Widgets")
+            btnWidget.setStyleSheet(UIFunctions.selectMenu(btnWidget.styleSheet()))
 
     ## ==> END ##
 
@@ -107,10 +171,39 @@ class MainWindow(QMainWindow):
     ## START ==> APP EVENTS
     ########################################################################
 
+    ## EVENT ==> MOUSE DOUBLE CLICK
+    ########################################################################
+    def eventFilter(self, watched, event):
+        if watched == self.le and event.type() == QtCore.QEvent.MouseButtonDblClick:
+            print("pos: ", event.pos())
+    ## ==> END ##
+
     ## EVENT ==> MOUSE CLICK
     ########################################################################
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
+        if event.buttons() == Qt.LeftButton:
+            print('Mouse click: LEFT CLICK')
+        if event.buttons() == Qt.RightButton:
+            print('Mouse click: RIGHT CLICK')
+        if event.buttons() == Qt.MidButton:
+            print('Mouse click: MIDDLE BUTTON')
+    ## ==> END ##
+
+    ## EVENT ==> KEY PRESSED
+    ########################################################################
+    def keyPressEvent(self, event):
+        print('Key: ' + str(event.key()) + ' | Text Press: ' + str(event.text()))
+    ## ==> END ##
+
+    ## EVENT ==> RESIZE EVENT
+    ########################################################################
+    def resizeEvent(self, event):
+        self.resizeFunction()
+        return super(MainWindow, self).resizeEvent(event)
+
+    def resizeFunction(self):
+        print('Height: ' + str(self.height()) + ' | Width: ' + str(self.width()))
     ## ==> END ##
 
     ########################################################################
