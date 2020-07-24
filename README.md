@@ -1,4 +1,4 @@
-# Simple PySide2 GUI
+# Simple PySide2 GUI (MODERN / FLAT GUI)
 
 ![image_1](https://user-images.githubusercontent.com/60605512/82736094-50887300-9cfd-11ea-8e9a-c2fbbf97d983.PNG)
 
