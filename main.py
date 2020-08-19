@@ -4,6 +4,14 @@
 ## PROJECT MADE WITH: Qt Designer and PySide2
 ## V: 1.0.0
 ##
+## This project can be used freely for all uses, as long as they maintain the
+## respective credits only in the Python scripts, any information in the visual
+## interface (GUI) can be modified without any implication.
+##
+## There are limitations on Qt licenses if you want to use your products
+## commercially, I recommend reading them on the official website:
+## https://doc.qt.io/qtforpython/licenses.html
+##
 ################################################################################
 
 import sys
@@ -14,13 +22,7 @@ from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFo
 from PySide2.QtWidgets import *
 
 # GUI FILE
-from ui_main import Ui_MainWindow
-
-# IMPORT QSS CUSTOM
-from ui_styles import Style
-
-# IMPORT FUNCTIONS
-from ui_functions import *
+from app_modules import *
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -62,7 +64,7 @@ class MainWindow(QMainWindow):
 
         ## ==> ADD CUSTOM MENUS
         self.ui.stackedWidget.setMinimumWidth(20)
-        UIFunctions.addNewMenu(self, "Home Page", "btn_home", "url(:/16x16/icons/16x16/cil-home.png)", True)
+        UIFunctions.addNewMenu(self, "HOME", "btn_home", "url(:/16x16/icons/16x16/cil-home.png)", True)
         UIFunctions.addNewMenu(self, "Add User", "btn_new_user", "url(:/16x16/icons/16x16/cil-user-follow.png)", True)
         UIFunctions.addNewMenu(self, "Custom Widgets", "btn_widgets", "url(:/16x16/icons/16x16/cil-equalizer.png)", False)
         ## ==> END ##
@@ -76,7 +78,7 @@ class MainWindow(QMainWindow):
         ## ==> END ##
 
         ## USER ICON ==> SHOW HIDE
-        UIFunctions.userIcon(self, "WM", "url(:/16x16/icons/16x16/cil-user.png)", True)
+        UIFunctions.userIcon(self, "WM", "", True)
         ## ==> END ##
 
 

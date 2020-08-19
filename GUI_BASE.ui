@@ -1366,7 +1366,7 @@ QPushButton:pressed {
             </property>
             <property name="maximumSize">
              <size>
-              <width>16777215</width>
+              <width>70</width>
               <height>16777215</height>
              </size>
             </property>
@@ -1572,6 +1572,9 @@ QPushButton:pressed {
                         <family>Segoe UI</family>
                         <pointsize>40</pointsize>
                        </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true"/>
                       </property>
                       <property name="text">
                        <string>HOME</string>

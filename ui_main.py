@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
-
 ################################################################################
-## Form generated from reading UI file 'gui_base_v4dRKXpm.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.14.1
+## BY: WANDERSON M.PIMENTA
+## PROJECT MADE WITH: Qt Designer and PySide2
+## V: 1.0.0
 ##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
+## This project can be used freely for all uses, as long as they maintain the
+## respective credits only in the Python scripts, any information in the visual
+## interface (GUI) can be modified without any implication.
+##
+## There are limitations on Qt licenses if you want to use your products
+## commercially, I recommend reading them on the official website:
+## https://doc.qt.io/qtforpython/licenses.html
+##
 ################################################################################
 
 from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
@@ -701,6 +708,7 @@ class Ui_MainWindow(object):
         font5.setFamily(u"Segoe UI")
         font5.setPointSize(40)
         self.label_6.setFont(font5)
+        self.label_6.setStyleSheet(u"")
         self.label_6.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_10.addWidget(self.label_6)
@@ -1383,4 +1391,3 @@ class Ui_MainWindow(object):
         self.label_credits.setText(QCoreApplication.translate("MainWindow", u"Registered by: Wanderson M. Pimenta", None))
         self.label_version.setText(QCoreApplication.translate("MainWindow", u"v1.0.0", None))
     # retranslateUi
-

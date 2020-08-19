@@ -4,13 +4,18 @@
 ## PROJECT MADE WITH: Qt Designer and PySide2
 ## V: 1.0.0
 ##
+## This project can be used freely for all uses, as long as they maintain the
+## respective credits only in the Python scripts, any information in the visual
+## interface (GUI) can be modified without any implication.
+##
+## There are limitations on Qt licenses if you want to use your products
+## commercially, I recommend reading them on the official website:
+## https://doc.qt.io/qtforpython/licenses.html
+##
 ################################################################################
 
 ## ==> GUI FILE
 from main import *
-
-## ==> APP FUNCTIONS
-from app_functions import *
 
 ## ==> GLOBALS
 GLOBAL_STATE = 0
@@ -125,7 +130,6 @@ class UIFunctions(MainWindow):
         button.setLayoutDirection(Qt.LeftToRight)
         button.setFont(font)
         button.setStyleSheet(Style.style_bt_standard.replace('ICON_REPLACE', icon))
-
         button.setText(name)
         button.setToolTip(name)
         button.clicked.connect(self.Button)
@@ -232,7 +236,7 @@ class UIFunctions(MainWindow):
 
         ## SHOW ==> CLOSE APPLICATION
         self.ui.btn_close.clicked.connect(lambda: self.close())
-        
+
 
     ########################################################################
     ## END - GUI DEFINITIONS
