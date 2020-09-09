@@ -9,5 +9,8 @@ This project works very well with Windows, however on Linux and macOS there are 
 # REQUERIMENTS:
 PySide2 (pip install pyside2)
 
+# RUN FILE:
+main.py
+
 # Youtube Video:
 [https://www.youtube.com/watch?v=iaIooM9FlRI](url)
