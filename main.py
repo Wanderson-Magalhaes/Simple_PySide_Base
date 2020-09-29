@@ -48,7 +48,7 @@ class MainWindow(QMainWindow):
         UIFunctions.labelDescription(self, 'Set text')
         ## ==> END ##
 
-        ## REMOVE ==> STANDARD TITLE BAR
+        ## WINDOW SIZE ==> DEFAULT SIZE
         startSize = QSize(1000, 720)
         self.resize(startSize)
         self.setMinimumSize(startSize)
