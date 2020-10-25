@@ -1,6 +1,6 @@
 # Python Interface - PySide2/PyQt5(optional) (MODERN / FLAT GUI)
 
-> ## :warning: **Warning**: PySide2 and PyQt5 in versions 5.15.0 and 5.15.1 are causing problems due to several updates in process.
+> ## :warning: **Warning**: PySide2 and PyQt5 in version 5.15.1 are causing problems due to several updates in process.
 > For this project use the stable version "5.14.2.2" or "5.15.0" (not "5.15.1") (**pip install pyside2==5.14.2.2**)!
 >
 > Note: https://wiki.qt.io/Qt_for_Python_Development_Notes.
